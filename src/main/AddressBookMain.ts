@@ -19,6 +19,8 @@ while (running) {
     console.log("7. Search by state");
     console.log("8. View By city");
     console.log("9. View By state");
+    console.log("10. Count By city");
+    console.log("11. Count By state");
     console.log("10. Exit");
 
     const choice = readline.questionInt("Enter choice: ");
@@ -122,6 +124,23 @@ while (running) {
             }
 
            break;
+        }
+        case 10 : {
+
+            const cityMap = system.countByCity();
+            for(const city in cityMap){
+              console.log(`${city} : ${cityMap[city]}`);
+            }
+           break;
+            
+        }
+        case 11 : {
+
+            const stateMap = system.countByState();
+            for(const state in stateMap){
+              console.log(`${state} : ${stateMap[state]}`);
+            }
+            break;
         }
         case 10:
             console.log("Exited");

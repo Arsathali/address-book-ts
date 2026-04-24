@@ -89,5 +89,36 @@ export class AddressBookSystem {
         return stateMap;
     }
 
+    countByCity(): Record<string, number> {
+
+        const cityCount: Record<string, number> = {};
+
+        for (const book of Object.values(this.addressBooks)) {
+            for (const contact of book.getContacts()) {
+
+                if (contact.city) {
+                    cityCount[contact.city!] ||= 0;
+                    cityCount[contact.city]!++;
+                }
+            }
+        }
+
+        return cityCount;
+    }
+
+    countByState(): Record<string, number> {
+
+        const stateCount: Record<string, number> = {};
+
+        for (const book of Object.values(this.addressBooks)) {
+            for (const contact of book.getContacts()) {
+
+                stateCount[contact.state] ||= 0;
+                stateCount[contact.state]!++;
+            }
+        }
+
+        return stateCount;
+    }
 
 }
