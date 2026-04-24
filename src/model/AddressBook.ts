@@ -29,4 +29,16 @@ export class AddressBook{
         return true;
     }
 
+    deleteContact(firstName : string , lastName : string) : boolean{
+        
+        let initialLength = this.contact.length;
+
+        this.contact = this.contact.filter(
+             c=> !(c.firstName === firstName && c.lastName === lastName)
+        );
+
+        return this.contact.length < initialLength;  
+    }
+
+
 }
