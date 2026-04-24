@@ -48,5 +48,17 @@ export class AddressBook{
         return this.contact.length < initialLength;  
     }
 
+    sortByName() : Contact[]{
+
+        return this.contact.sort((a,b) =>
+            {
+                const firstCompare = a.firstName.localeCompare(b.firstName);
+                if (firstCompare !== 0) return firstCompare;
+
+                return a.lastName.localeCompare(b.lastName);
+            }
+        );
+    }
+
 
 }

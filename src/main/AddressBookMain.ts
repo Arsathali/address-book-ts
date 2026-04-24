@@ -21,7 +21,8 @@ while (running) {
     console.log("9. View By state");
     console.log("10. Count By city");
     console.log("11. Count By state");
-    console.log("10. Exit");
+    console.log("12. Sort and Display");
+    console.log("13. Exit");
 
     const choice = readline.questionInt("Enter choice: ");
 
@@ -142,7 +143,18 @@ while (running) {
             }
             break;
         }
-        case 10:
+        case 12: {
+            const bookName = readline.question("Enter Address Book Name: ");
+            const book = system.getAddressBook(bookName);
+
+            if (!book) {
+                console.log("Not found");
+                break;
+            }
+            sortAndDisplay(book);
+            break;
+        }
+        case 13:
             console.log("Exited");
             running = false;
             break; 
@@ -240,4 +252,13 @@ function deleteContact(addressBook : AddressBook){
 function displayContacts(addressBook : AddressBook){
     const contacts = addressBook.getContacts();
     console.log(contacts);
+}
+
+function sortAndDisplay(addressBook : AddressBook){
+
+    const sortedContact = addressBook.sortByName();
+
+    sortedContact.forEach(
+        c => console.log(c)
+    );
 }
