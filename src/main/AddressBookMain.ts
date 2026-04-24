@@ -17,7 +17,9 @@ while (running) {
     console.log("5. View Contacts");
     console.log("6. Search by city");
     console.log("7. Search by state");
-    console.log("8. Exit");
+    console.log("8. View By city");
+    console.log("9. View By state");
+    console.log("10. Exit");
 
     const choice = readline.questionInt("Enter choice: ");
 
@@ -77,8 +79,8 @@ while (running) {
             deleteContact(book);
             break;
         }
-        case 5:
-             const bookName = readline.question("Enter Address Book Name: ");
+        case 5: {
+            const bookName = readline.question("Enter Address Book Name: ");
             const book = system.getAddressBook(bookName);
 
             if (!book) {
@@ -87,7 +89,7 @@ while (running) {
             }
             displayContacts(book);
             break;
-
+        }
         case 6:{
             const city = readline.question("Enter the City :");
             const contacts: Contact[] = system.searchByCity(city);
@@ -100,7 +102,28 @@ while (running) {
             console.log(contacts);
             break;
         }
-        case 8:
+
+        case 8 : {
+
+           const cityMap = system.viewByCity();
+
+           for(const city in cityMap){
+              console.log(`${city} ---> ${cityMap[city]}`);
+            }
+
+           break;
+        }
+        case 9 : {
+
+            const stateMap = system.viewByState();
+
+           for(const state in stateMap){
+              console.log(`${state} ---> ${stateMap[state]}`);
+            }
+
+           break;
+        }
+        case 10:
             console.log("Exited");
             running = false;
             break; 

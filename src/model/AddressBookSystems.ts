@@ -52,4 +52,42 @@ export class AddressBookSystem {
         }
         return result;
     }
+
+    viewByCity(): Record<string,Contact[]>{
+
+
+        const cityMap : Record<string,Contact[]> = {};
+
+        for (const book of Object.values(this.addressBooks)) {
+            for (const contact of book.getContacts()) {
+
+                if (!cityMap[contact.city]) {
+                    cityMap[contact.city] = [];
+                }
+
+                cityMap[contact.city]!.push(contact);
+            }
+        }
+        return cityMap;
+    }
+
+    viewByState(): Record<string,Contact[]>{
+
+
+        const stateMap : Record<string,Contact[]> = {};
+
+        for (const book of Object.values(this.addressBooks)) {
+            for (const contact of book.getContacts()) {
+
+                if (!stateMap[contact.state]) {
+                    stateMap[contact.state] = [];
+                }
+
+                stateMap[contact.state]!.push(contact);
+            }
+        }
+        return stateMap;
+    }
+
+
 }
