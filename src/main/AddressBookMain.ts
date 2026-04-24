@@ -19,7 +19,13 @@ while (running) {
 
     switch (choice) {
         case 1:
-            addContact();
+            
+            let choice : string;
+            do{
+                addContact();
+                choice = readline.question("Do You want to Add Another Contact (Y/N)");
+            }while(choice.toLowerCase() === 'y');
+
             break;
 
         case 2:
