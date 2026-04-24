@@ -11,4 +11,22 @@ export class AddressBook{
     getContacts() : Contact[] {
         return this.contact;
     }
+
+    findContact(firstName:string, lastName: string) : Contact | undefined {
+        return this.contact.find(
+            c=> c.firstName === firstName && c.lastName === lastName
+        );
+    }
+
+
+    editContact(firstName : string , lastName : string , updatedContact : Contact) : boolean {
+
+        let index =  this.contact.findIndex(c=> c.firstName === firstName && c.lastName === lastName);
+
+        if (index === -1) return false;
+
+        this.contact[index] = updatedContact;
+        return true;
+    }
+
 }
