@@ -1,46 +1,92 @@
 import {Contact} from '../model/Contact';
 import { AddressBook } from '../model/AddressBook';
 import readline from "readline-sync";
+import { AddressBookSystem } from '../model/AddressBookSystems';
 
 console.log("Welcome to Address Book Program");
 
-const addressBook = new AddressBook();
+const system = new AddressBookSystem();
 
 let running : boolean = true;
 
 while (running) {
-    console.log("\n1. Add Contact");
-    console.log("2. Edit Contact");
-    console.log("3. Delete Contact");
-    console.log("4. View Contacts");
-    console.log("5. Exit");
+    console.log("\n1. Add AddressBook");
+    console.log("2. Add Contact");
+    console.log("3. Edit Contact");
+    console.log("4. Delete Contact");
+    console.log("5. View Contacts");
+    console.log("6. Exit");
 
     const choice = readline.questionInt("Enter choice: ");
 
     switch (choice) {
-        case 1:
-            
+
+        case 1:{
+
+            const name = readline.question("Enter Address Book Name: ");
+            const created = system.addAddressBook(name);
+
+            if (created) console.log("Address Book created");
+            else console.log("Already exists");
+            break;
+
+        }
+
+        case 2:
+            {
+            const bookName = readline.question("Enter Address Book Name: ");
+            const book = system.getAddressBook(bookName);
+
+            if (!book) {
+                console.log("Address Book not found");
+                break;
+            }
+
             let choice : string;
             do{
-                addContact();
+                addContact(book);
                 choice = readline.question("Do You want to Add Another Contact (Y/N)");
             }while(choice.toLowerCase() === 'y');
 
             break;
 
-        case 2:
-            editContact();
-            break;
+        }
+        case 3:{
+            const bookName = readline.question("Enter Address Book Name: ");
+            const book = system.getAddressBook(bookName);
 
-        case 3:
-            deleteContact();
-            break;
+            if (!book) {
+                console.log("Not found");
+                break;
+            }
 
-        case 4:
-            displayContacts();
+            editContact(book);
             break;
+        }
+        case 4:{
+            const bookName = readline.question("Enter Address Book Name: ");
+            const book = system.getAddressBook(bookName);
 
+            if (!book) {
+                console.log("Not found");
+                break;
+            }
+            
+            deleteContact(book);
+            break;
+        }
         case 5:
+             const bookName = readline.question("Enter Address Book Name: ");
+            const book = system.getAddressBook(bookName);
+
+            if (!book) {
+                console.log("Not found");
+                break;
+            }
+            displayContacts(book);
+            break;
+
+        case 6:
             console.log("Exited");
             running = false;
             break; 
@@ -50,7 +96,7 @@ while (running) {
     }
 }
 
-function addContact(){
+function addContact(addressBook : AddressBook){
     // Take input from user - by readline-sync
     const firstName = readline.question("Enter First Name: ");
     const lastName = readline.question("Enter Last Name: ");
@@ -75,7 +121,7 @@ function addContact(){
     addressBook.addContact(contact);
 }
     
-function editContact(){
+function editContact(addressBook : AddressBook){
     
     console.log("Edit the contact");
 
@@ -116,7 +162,7 @@ function editContact(){
     }
 }
 
-function deleteContact(){
+function deleteContact(addressBook : AddressBook){
 
     console.log("Edit the contact");
 
@@ -132,7 +178,7 @@ function deleteContact(){
         }
 }
 
-function displayContacts(){
+function displayContacts(addressBook : AddressBook){
     const contacts = addressBook.getContacts();
     console.log(contacts);
 }
