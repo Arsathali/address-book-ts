@@ -118,7 +118,10 @@ function addContact(addressBook : AddressBook){
         email
     );
 
-    addressBook.addContact(contact);
+    const isAdded = addressBook.addContact(contact);
+
+    console.log(isAdded ? "Added The Contact Successfully" : "Duplicate Contact! Not Added");
+    
 }
     
 function editContact(addressBook : AddressBook){

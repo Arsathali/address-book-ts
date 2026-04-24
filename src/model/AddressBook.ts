@@ -4,8 +4,16 @@ export class AddressBook{
 
     private contact: Contact[] = []; 
 
-    addContact(contact : Contact) : void {
+    addContact(contact : Contact) : boolean {
+
+        const exists = this.contact.some(c=>c.equals(contact));
+
+        if(exists){
+            return false;
+        }
+
         this.contact.push(contact);
+        return true;
     }
 
     getContacts() : Contact[] {
