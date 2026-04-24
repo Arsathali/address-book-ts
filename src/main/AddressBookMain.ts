@@ -15,7 +15,9 @@ while (running) {
     console.log("3. Edit Contact");
     console.log("4. Delete Contact");
     console.log("5. View Contacts");
-    console.log("6. Exit");
+    console.log("6. Search by city");
+    console.log("7. Search by state");
+    console.log("8. Exit");
 
     const choice = readline.questionInt("Enter choice: ");
 
@@ -86,7 +88,19 @@ while (running) {
             displayContacts(book);
             break;
 
-        case 6:
+        case 6:{
+            const city = readline.question("Enter the City :");
+            const contacts: Contact[] = system.searchByCity(city);
+            console.log(contacts);
+            break;  
+        }
+        case 7:{
+            const state = readline.question("Enter the State :");
+            const contacts: Contact[] = system.searchByState(state);
+            console.log(contacts);
+            break;
+        }
+        case 8:
             console.log("Exited");
             running = false;
             break; 
